@@ -20,7 +20,6 @@ app.get("/", async (req, res) => {
 
 app.post("/", async (req, res) => {
  const {name,email, addresses} = req.body;  
-
   const saveData = await prisma.user.create({
     data: {
       name,
@@ -34,7 +33,7 @@ app.post("/", async (req, res) => {
     data: saveData,
   });
 
-  
+
 });
 
 const port = 3000;
