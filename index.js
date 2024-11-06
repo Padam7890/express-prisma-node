@@ -1,28 +1,17 @@
 const express = require("express");
-const router = express.Router();
+const { PrismaClient } = require("@prisma/client");
 
-const { PrismaClient,Prisma } = require("@prisma/client");
-const { PrismaClientValidationError, PrismaClientUnknownRequestError } = require("@prisma/client/runtime/library");
 
-const prisma = new PrismaClient();
 
-prisma
-  .$connect()
-  .then((result) => {
-    console.log("Connected to database");
-  })
-  .catch((err) => {
-    console.log("Error connecting to database", err);
-    process.exit(1);
-  });
+
+const prisma = new PrismaClient();   
 
 const app = express();
 
+
+
+
 app.use(express.json());
-
-
-
-
 
 
 
@@ -38,6 +27,9 @@ app.get("/padam", function (req, res) {
 app.get("/", async (req, res) => {
   //provider(prisma, tablename(user), method()
   const getUser = await prisma.user.findMany();
+
+
+
   return res.status(200).json({
     message: "user successfully fetched",
     data: getUser,
@@ -49,6 +41,8 @@ app.get("/", async (req, res) => {
 
 app.post("/user", async (req, res) => {
   const { name, email, addresses } = req.body;
+
+
   console.log(req.body);
   const saveData = await prisma.user.create({
     data: {
@@ -85,6 +79,44 @@ app.put("/user/:id", async (req, res) => {
     message: "user updated successfully",
   });
 });
+
+
+app.post("/employee", (req,res)=> {
+  const { name,age} = req.body;
+  
+
+  const datasave  = prisma.employee.create({
+    data:{
+      name:name,
+      age:age
+    }
+  })
+
+  res.json({
+    messgae:"data "
+
+  })
+
+
+
+
+
+  app.route("/emploeye").get( (req,res)=>{
+
+  }).post
+
+
+
+
+
+
+
+})
+
+
+
+
+
 
 const port = 3000;
 
