@@ -76,14 +76,17 @@ Follow these steps to get your backend up and running:
    
    - Define your models in the `schema.prisma` file.
    - Generate a migration:
-     ```bash npx prisma migrate dev --name init
+     ```bash
+      npx prisma migrate dev --name init
      ```
    - Second migration (write whatever you changes after --name)
-  ```bash npx prisma migrate dev --name table_created```
+  ```bash
+ npx prisma migrate dev --name table_created ```
 
 
 4. **Install Prisma Client:**
-   ```bash npm install @prisma/client```
+   ```bash
+ npm install @prisma/client ```
 
 ## For more About Prisma, Follow Prisma documentation:
 https://www.prisma.io/docs/getting-started/QuickStart
