@@ -93,25 +93,13 @@ app.post("/employee", (req,res)=> {
   })
 
   res.json({
-    messgae:"data "
+    messgae:"data",
+    data:datasave
 
   })
-
-
-
-
-
-  app.route("/emploeye").get( (req,res)=>{
-
-  }).post
-
-
-
-
-
-
-
 })
+
+
 
 
 
