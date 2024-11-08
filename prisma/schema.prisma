@@ -15,6 +15,7 @@ model User {
   email String  @unique
   name  String?
   addresses String
+  password String 
 
 
   //realtionship
@@ -36,11 +37,4 @@ model Profile {
   bio    String?
   userId Int     @unique
   user   User    @relation(fields: [userId], references: [id])
-}
-
-
-model Employee{
-    id     Int     @id @default(autoincrement())
-    name   String
-    age    Int
 }

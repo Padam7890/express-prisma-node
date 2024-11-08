@@ -1,14 +1,14 @@
+/*
+  Warnings:
+
+  - Added the required column `password` to the `User` table without a default value. This is not possible if the table is not empty.
+
+*/
 -- DropForeignKey
 ALTER TABLE `profile` DROP FOREIGN KEY `profile_userId_fkey`;
 
--- CreateTable
-CREATE TABLE `Employee` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(191) NOT NULL,
-    `age` INTEGER NOT NULL,
-
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+-- AlterTable
+ALTER TABLE `user` ADD COLUMN `password` VARCHAR(191) NOT NULL;
 
 -- AddForeignKey
 ALTER TABLE `Profile` ADD CONSTRAINT `Profile_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
