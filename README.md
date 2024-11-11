@@ -1,4 +1,4 @@
-
+"Note: Copy the env.example file to a new .env file in the root folder."
 
 # Learn Express
 
