@@ -4,13 +4,24 @@ const  bcrypt = require('bcryptjs');
 function getUser(req, res) {
   res.send("hye i am a user");
 
+  //database bata data haru get garne
+
+  // example:prisma.user.findMany();
+
+  // res.json({
+  //   messgae:"data fetch"
+  //   data: example.data
+  // })
+  
 
 }
+
 
 async function createUser(req, res) {
 
   ///get data from body
   const { name, addresses, password, email } = req.body;
+  console.log(req.body);
 
   // Check if any of the required fields are missing (validation)
   if (!name || !addresses || !password || !email) {
@@ -19,7 +30,7 @@ async function createUser(req, res) {
     });
   }
 
-  //check emil if already exist or not (check if unique)
+  //check email if already exist or not (check if unique)
 
   const isExist =  prisma.user.findUnique({
     where: {
@@ -59,6 +70,10 @@ async function createUser(req, res) {
 function homepage(req, res) {
      res.send("Hey i am a homepage");
 }
+
+
+
+
 
 console.log('hey')
 

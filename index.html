@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+  </head>
+  <body>
+    <form
+      id="form"
+      style="display: flex; flex-direction: column; width: 300px; margin: auto"
+    >
+      <label for="name" style="margin-bottom: 10px">
+        Name:
+        <input
+          type="text"
+          id="name"
+          name="name"
+          style="width: 100%; padding: 8px; margin-top: 5px"
+        />
+      </label>
+      <label for="address" style="margin-bottom: 10px">
+        Address:
+        <input
+          type="text"
+          id="address"
+          name="address"
+          style="width: 100%; padding: 8px; margin-top: 5px"
+        />
+      </label>
+      <label for="email" style="margin-bottom: 10px">
+        Email:
+        <input
+          type="email"
+          id="email"
+          name="email"
+          style="width: 100%; padding: 8px; margin-top: 5px"
+        />
+      </label>
+      <label for="password" style="margin-bottom: 10px">
+        Password:
+        <input
+          type="password"
+          id="password"
+          name="password"
+          style="width: 100%; padding: 8px; margin-top: 5px"
+        />
+      </label>
+      <button
+        type="submit"
+        style="
+          padding: 10px;
+          background-color: #4caf50;
+          color: white;
+          border: none;
+          cursor: pointer;
+          margin-top: 10px;
+        "
+      >
+        Submit
+      </button>
+    </form>
+
+    <script>
+      const form = document.getElementById("form");
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        //get all value of input
+        const name = document.getElementById("name").value;
+        const address = document.getElementById("address").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        const data = {
+          name: name,
+          addresses: address,
+          email: email,
+          password: password,
+        };
+
+        const dataSend = fetch("http://localhost:3000/user", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error(`HTTP error! status: ${res.status}`);
+            }
+            return res.json();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+      });
+    </script>
+  </body>
+</html>
