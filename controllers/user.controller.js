@@ -30,13 +30,13 @@ async function createUser(req, res) {
 
   //check email if already exist or not (check if unique)
 
-  const isExist = prisma.user.findUnique({
+  const isExist = await prisma.user.findUnique({
     where: {
       email,
     },
   });
 
-  if (!isExist) {
+  if (isExist) {
     return res.status(400).json({
       message: "Email already exist",
     });
