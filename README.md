@@ -109,6 +109,10 @@ const prisma  = new PrismaClient();
 
 module.exports = prisma;```
 
+
+
+
+
 ## Additional Resources
 
 - **Prisma Documentation**: [https://www.prisma.io/docs/getting-started/quickstart](https://www.prisma.io/docs/getting-started/quickstart)
