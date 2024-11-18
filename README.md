@@ -89,6 +89,26 @@ Follow these steps to get your backend up and running.
    npm install @prisma/client
    ```
 
+ **Define Routes and Controllers:**
+   - Create a `routes` folder for defining routes.
+   - Create a `controllers` folder for handling business logic.
+
+5 **Set up configuration files:**
+
+   - Create a `config` folder for configuration files.
+   - Example: `prisma.js` for Prisma configuration.
+
+
+ ***  `prisma.js` Prisma Configuration ***
+
+```javascript
+//prisma.js
+const {PrismaClient} = require("@prisma/client")
+
+const prisma  = new PrismaClient();
+
+module.exports = prisma;
+
 ## Additional Resources
 
 - **Prisma Documentation**: [https://www.prisma.io/docs/getting-started/quickstart](https://www.prisma.io/docs/getting-started/quickstart)
