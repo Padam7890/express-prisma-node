@@ -2,15 +2,10 @@ const prisma = require("../config/prisma");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-
-// const body = {
-//   "name":"padam"
-// }
-
-
-
 async function getUser(req, res) {
-  const getUser = await prisma.user.findMany();
+  console.log(req.id.id)
+  const getUser = await prisma.user.findMany(
+  );
   return res.status(200).json({
     message:"User Found",
     data: getUser
@@ -61,10 +56,9 @@ async function createUser(req, res) {
     },
   });
 
-  const tokenGenerate = jwt.sign(
+  const tokenGenerate = await jwt.sign(
     {
-      name: createUser.name,
-      email: createUser.email,
+      id:createUser.id,
     },
     "padam",
     {
@@ -84,30 +78,39 @@ function homepage(req, res) {
   res.send("Hey i am a homepage");
 }
 
-async function login() {
- 
+async function login(req,res) {
+
+try {
   const {email,password} = req.body;
+   // Check if any of the required fields are missing (validation)
+   if ( !password || !email) {
+    return res.status(400).json({
+      message:
+        "Please fill in all required fields: name, addresses, password, and email.",
+    });
+  }
+  
   const checkEmail = await prisma.user.findUnique({
     where:{
       email,
     }
   })
+
   if(!checkEmail){
     return res.status(401).json({
       message: "Email not found",
     })
   }
 
-  const isPassword = bcrypt.compare(password, checkEmail.password);
+  const isPassword = await bcrypt.compare(password, checkEmail.password);
   if(!isPassword){
     return res.status(401).json({
       message: "Password not match",
     })
   }
-  const tokenGenerate = jwt.sign(
+  const tokenGenerate = await jwt.sign(
     {
-      name: createUser.name,
-      email: createUser.email,
+      id:checkEmail.id,
     },
     "padam",
     {
@@ -120,6 +123,13 @@ return res.status(200).json({
   token:tokenGenerate
 })
 
+  
+} catch (error) {
+  return res.status(500).json({
+    message:"Internal Server Error",
+    error: error.message,
+  })
+}
 }
 
 console.log("hello");
